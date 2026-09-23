@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Sécurité : politique de sécurité du contenu (CSP) + referrer -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; upgrade-insecure-requests; img-src 'self' data: blob:; connect-src 'self' https://api.emailjs.com; frame-src 'self' blob:; form-action 'self' mailto:">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Devis gratuit — EPIOS Solutions Informatiques</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<meta name="description" content="Demandez votre devis informatique gratuit à EPIOS, spécialiste pour particuliers à Nice et dans un rayon de 30 km. Réponse sous 24 h.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="js/vendor/jspdf.umd.min.js"></script>
+<script src="js/vendor/email.min.js"></script>
+  <link rel="stylesheet" href="css/devis.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="index.html" class="logo">
+      <span class="mark"><img src="assets/logo-mark.png" alt="EPIOS"></span>
+      <span class="name">EPIOS</span>
+    </a>
+    <nav class="nav-links" id="menu">
+      <a class="link" href="index.html">Accueil</a>
+      <a class="link" href="index.html#prestations">Prestations</a>
+      <a class="link" href="index.html#tarifs">Tarifs</a>
+      <a class="link" href="index.html#avis">Avis</a>
+      <a class="link" href="devis.html">Devis</a>
+      <a class="btn btn-primary" href="reservation.html">Prendre RDV <span class="arrow">→</span></a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="phead">
+  <span class="blob pb1"></span><span class="blob pb2"></span>
+  <svg class="contour" viewBox="0 0 500 400" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M500 60C400 40 350 130 260 130S110 40 10 90"/><path d="M500 140C400 120 350 210 260 210S110 120 10 170"/><path d="M500 220C400 200 350 290 260 290S110 200 10 250"/></svg>
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">Accueil</a> / Devis gratuit</div>
+    <h1>Votre devis gratuit, sans engagement.</h1>
+    <p>Décrivez votre besoin en deux minutes. Je reviens vers vous sous 24 h ouvrées avec une estimation claire, selon la prestation et le mode d'intervention.</p>
+    <div class="free-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>
+      Devis 100 % gratuit · Sans engagement · Sans carte bancaire
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="split">
+    <div class="panel">
+      <form id="devisForm" novalidate>
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden"><label>Laissez ce champ vide<input type="text" name="website" id="hp" tabindex="-1" autocomplete="off"></label></div>
+        <span class="step-tag">01 — Quelle prestation ?</span>
+        <div class="chips">
+          <div class="chip"><input type="radio" name="service" id="s1" value="Configuration de PC & Migration Windows 11" checked>
+            <label for="s1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="12.5" rx="2"/><path d="M8 20.5h8M12 16.5v4"/></svg></span>Configuration & Windows 11</label></div>
+          <div class="chip"><input type="radio" name="service" id="s2" value="Réinitialisation & Nettoyage PC">
+            <label for="s2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4.5V10h-5.5"/></svg></span>Réinitialisation PC</label></div>
+          <div class="chip"><input type="radio" name="service" id="s3" value="Remplacement RAM / Disque dur / Batterie">
+            <label for="s3"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="1.5"/><path d="M7 7V4M11 7V4M15 7V4M7 17v3M13 17v3"/></svg></span>RAM / Disque dur / Batterie</label></div>
+          <div class="chip"><input type="radio" name="service" id="s4" value="Installation & Configuration Imprimante">
+            <label for="s4"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8.5V3.5h10v5"/><rect x="3.5" y="8.5" width="17" height="8" rx="1.5"/><path d="M7 14.5h10v6H7z"/></svg></span>Imprimante</label></div>
+          <div class="chip"><input type="radio" name="service" id="s5" value="Diagnostic Informatique">
+            <label for="s5"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.5-4.5"/></svg></span>Diagnostic</label></div>
+          <div class="chip"><input type="radio" name="service" id="s6" value="Configuration équipement réseaux">
+            <label for="s6"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="5" rx="1.2"/><rect x="3" y="15" width="18" height="5" rx="1.2"/><path d="M12 9v6M8 12h8"/></svg></span>Équipement réseaux</label></div>
+        </div>
+
+        <span class="step-tag">02 — Mode d'intervention souhaité</span>
+        <div class="mode">
+          <div class="chip"><input type="radio" name="mode" id="m1" value="À distance" checked><label for="m1">À distance (remote)</label></div>
+          <div class="chip"><input type="radio" name="mode" id="m2" value="À domicile"><label for="m2">À domicile</label></div>
+        </div>
+        <div class="mode-note" id="modeNote">Le remplacement de composant (RAM / Disque dur / Batterie) demande une manipulation physique : intervention <b>à domicile</b> uniquement.</div>
+
+        <span class="step-tag">03 — Décrivez votre situation</span>
+        <div class="field">
+          <label class="lbl" for="desc">Le besoin ou le problème</label>
+          <textarea id="desc" placeholder="Ex : nouveau PC portable à configurer avec Office et migration des données, ou : batterie à remplacer sur un Lenovo…"></textarea>
+          <div class="errmsg" id="descErr">Merci d'en dire un peu plus (au moins 10 caractères).</div>
+        </div>
+        <div class="field row">
+          <div>
+            <label class="lbl" for="materiel" id="materielLbl">Matériel concerné</label>
+            <select id="materiel"></select>
+            <div class="errmsg" id="materielErr">Sélectionnez le matériel concerné.</div>
+          </div>
+          <div>
+            <label class="lbl" for="urgence">Niveau d'urgence</label>
+            <select id="urgence"><option>Dès que possible</option><option>Dans la semaine</option><option>Pas pressé, je compare</option></select>
+          </div>
+        </div>
+        <div class="field" id="modeleField" style="display:none">
+          <label class="lbl" for="modele">Modèle de l'imprimante</label><input type="text" id="modele" placeholder="Ex. DeskJet 2720e, PIXMA TS3450, EcoTank ET-2850…"><div class="errmsg" id="modeleErr">Indiquez le modèle de l'imprimante.</div>
+        </div>
+
+        <span class="step-tag">04 — Comment vous joindre ?</span>
+        <div class="field row">
+          <div><label class="lbl" for="nom">Nom complet</label><input type="text" id="nom" placeholder="Camille Dupont"><div class="errmsg" id="nomErr">Merci d'indiquer votre nom.</div></div>
+          <div><label class="lbl" for="tel">Téléphone</label><input type="tel" id="tel" placeholder="07 68 69 55 40"><div class="errmsg" id="telErr">Numéro requis pour vous rappeler.</div></div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="email">E-mail</label><input type="email" id="email" placeholder="camille@exemple.fr"><div class="errmsg" id="emailErr">Adresse e-mail invalide.</div>
+        </div>
+        <div class="field" id="villeField" style="display:none">
+          <label class="lbl" for="ville">Ville d'intervention</label><input type="text" id="ville" placeholder="Nice, Cagnes-sur-Mer, Antibes…"><div class="errmsg" id="villeErr">Indiquez la ville d'intervention.</div>
+        </div>
+
+        <label class="consent"><input type="checkbox" id="rgpd"><span>J'accepte d'être recontacté par EPIOS au sujet de ma demande. Mes données servent uniquement à établir ce devis et ne font l'objet d'aucune prospection. J'ai pris connaissance de la <a href="confidentialite.html" target="_blank" rel="noopener">politique de confidentialité</a>.</span></label>
+        <div class="errmsg" id="rgpdErr" style="margin-top:-16px;margin-bottom:18px">Merci de cocher cette case pour continuer.</div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn btn-coral full" id="submitBtn">Envoyer ma demande <span class="arrow">→</span></button>
+          <span class="note">Gratuit · sans engagement · devis PDF immédiat</span>
+        </div>
+      </form>
+
+      <div class="success" id="success">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></div>
+        <h2>Demande envoyée !</h2>
+        <p>Votre devis, <b>gratuit et sans engagement</b>, s'est ouvert dans un nouvel onglet. Vous pouvez le rouvrir ou le télécharger ci-dessous.</p>
+        <div class="ref" id="refNo">Réf. AZ-000000</div>
+        <div class="mail-status" id="mailStatus"></div>
+        <div class="viewer-bar solo">
+          <span class="vl">Votre devis · <span id="doneRef" class="mono"></span></span>
+          <div class="vbtns">
+            <a class="vbtn" id="btnOpen" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg>Rouvrir dans un onglet</a>
+            <a class="vbtn pri" id="btnDl" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>Télécharger</a>
+          </div>
+        </div>
+        <br>
+        <a class="btn btn-outline" href="index.html">Retour à l'accueil</a>
+      </div>
+    </div>
+
+    <aside class="aside">
+      <div class="acard">
+        <h3>Pourquoi un devis EPIOS ?</h3>
+        <ul class="reassure">
+          <li><span class="rc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></span><span><b>Réponse en 24 h</b>Une estimation claire, sans délai interminable.</span></li>
+          <li><span class="rc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span><b>0 € et sans engagement</b>Vous décidez ensuite, en toute liberté.</span></li>
+          <li><span class="rc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span><span><b>Prix fixé d'avance</b>Le tarif est annoncé avant toute intervention.</span></li>
+        </ul>
+      </div>
+      <div class="acard dark">
+        <h3>Comment ça marche</h3>
+        <ol class="steps">
+          <li><span class="n">1.</span><span>Vous décrivez votre besoin dans le formulaire.</span></li>
+          <li><span class="n">2.</span><span>Je vous rappelle pour préciser les détails.</span></li>
+          <li><span class="n">3.</span><span>Vous recevez une estimation écrite.</span></li>
+          <li><span class="n">4.</span><span>Vous validez, j'interviens. C'est tout.</span></li>
+        </ol>
+      </div>
+      <div class="acard">
+        <h3>Besoin d'aller plus vite ?</h3>
+        <p class="contact-mini">Appelez-moi au <a href="tel:+33768695540">07 68 69 55 40</a> ou <a href="reservation.html">prenez rendez-vous</a> en ligne.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-in">
+    <a href="index.html" class="logo"><span class="mark" style="width:28px;height:28px"><img src="assets/logo-mark.png" alt="EPIOS"></span><span class="name">EPIOS</span></a>
+    <div class="foot-nav"><a href="index.html">Accueil</a><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGPS</a><a href="confidentialite.html">Confidentialité</a></div>
+    <span class="mono">© 2026 EPIOS</span>
+  </div>
+</footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/azpdf.js"></script>
+  <script src="js/devis.js"></script>
+</body>
+</html>

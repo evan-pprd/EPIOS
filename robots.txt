@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Remplacez le domaine ci-dessous par votre domaine définitif.
+Sitemap: https://epios.fr/sitemap.xml
